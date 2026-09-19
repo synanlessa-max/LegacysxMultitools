@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Утилиты для анализа и поиска системы</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+      line-height: 1.5;
+    }
+
+    /* Шапка сайта */
+    header {
+      background-color: #000000;
+      border-bottom: 1px solid #282828;
+      padding: 12px 24px;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #bbb;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .search-box input {
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 6px 12px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      width: 200px;
+    }
+
+    /* Основной контент */
+    main {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .page-header {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      color: #888;
+      font-size: 15px;
+    }
+
+    /* Колонки программ */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .tool-card {
+      background-color: #1b1b1b;
+      border: 1px solid #2d2d2d;
+      border-radius: 6px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .tool-card:hover {
+      border-color: #444;
+      transform: translateY(-2px);
+    }
+
+    .tool-badge {
+      display: inline-block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: #2b2b2b;
+      color: #aaa;
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+
+    .tool-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .tool-desc {
+      font-size: 13.5px;
+      color: #aaa;
+      margin-bottom: 18px;
+      min-height: 40px;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .features-list li {
+      font-size: 13px;
+      color: #ccc;
+      margin-bottom: 7px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .features-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #ff9900;
+    }
+
+    /* Кнопки */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .btn {
+      background-color: #2b2b2b;
+      border: 1px solid #3c3c3c;
+      color: #f0f0f0;
+      padding: 10px 14px;
+      font-size: 13px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+
+    .btn:hover {
+      background-color: #383838;
+      border-color: #555555;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px dashed #3c3c3c;
+      color: #888;
+    }
+
+    .btn-secondary:hover {
+      background-color: #1f1f1f;
+      color: #ccc;
+      border-color: #555;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #222;
+      color: #666;
+      font-size: 12px;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: #4a90e2;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Навигация -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">ToolBox</div>
+      <ul class="nav-links">
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">Инструменты</a></li>
+        <li><a href="#">Документация</a></li>
+      </ul>
+      <div class="search-box">
+        <input type="text" placeholder="Поиск утилит...">
+      </div>
+    </div>
+  </header>
+
+  <!-- Контент -->
+  <main>
+    <div class="page-header">
+      <h1>Набор утилит для поиска и анализа системы</h1>
+      <p>Быстрый поиск файлов, анализ реестра, просмотр активности и проверка ПК</p>
+    </div>
+
+    <div class="tools-grid">
+
+      <!-- Колонка 1: Everything -->
+      <div class="tool-card">
+        <div>
+          <span class="tool-badge">Voidtools</span>
+          <h2 class="tool-title">Everything</h2>
+          <p class="tool-desc">Мгновенный локальный поисковик файлов и папок по их именам для Windows.</p>
+          <ul class="features-list">
+            <li>Мгновенное индексирование дисков NTFS</li>
+            <li>Минимальное потребление ОЗУ и CPU</li>
+            <li>Обновление базы в реальном времени</li>
+            <li>Поддержка масок, регулярок и фильтров</li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <!-- Скачивание напрямую с вашего GitHub -->
+          <a href="https://github.com/synanlessa-max/everything/raw/refs/heads/main/Everything.exe" 
+             download 
+             class="btn">
+            Скачать Everything (.exe)
+          </a>
+        </div>
+      </div>
+
+      <!-- Колонка 2: ShellBags -->
+      <div class="tool-card">
+        <div>
+          <span class="tool-badge">Forensics</span>
+          <h2 class="tool-title">ShellBags Explorer</h2>
+          <p class="tool-desc">Анализатор ключей реестра ShellBag для просмотра когда-либо открывавшихся папок.</p>
+          <ul class="features-list">
+            <li>Отображение удаленных и сетевых папок</li>
+            <li>Точные метки времени первого/последнего входа</li>
+            <li>Анализ активности в Проводнике Windows</li>
+            <li>Экспорт отчетов в CSV / XML</li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <a href="https://www.nirsoft.net/utils/shell_bags_view.html" target="_blank" class="btn">Скачать ShellBagsView</a>
+          <a href="https://ericzimmerman.github.io/" target="_blank" class="btn btn-secondary">Eric Zimmerman's Version</a>
+        </div>
+      </div>
+
+      <!-- Колонка 3: LastActivityView -->
+      <div class="tool-card">
+        <div>
+          <span class="tool-badge">NirSoft</span>
+          <h2 class="tool-title">LastActivityView</h2>
+          <p class="tool-desc">Сводный просмотр последних действий пользователя и запущенных процессов в системе.</p>
+          <ul class="features-list">
+            <li>Сбор логов из Prefetch, реестра и Event Log</li>
+            <li>Фиксация запуска .exe файлов и сбоев</li>
+            <li>История подключения съемных накопителей</li>
+            <li>Не требует установки (полностью Portable)</li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <a href="https://www.nirsoft.net/utils/computer_activity_view.html" target="_blank" class="btn">Скачать ZIP (Portable)</a>
+          <a href="https://www.nirsoft.net/utils/computer_activity_view.html" target="_blank" class="btn btn-secondary">Русификатор</a>
+        </div>
+      </div>
+
+      <!-- Колонка 4: Fear Checker -->
+      <div class="tool-card">
+        <div>
+          <span class="tool-badge">Screenshare / Check</span>
+          <h2 class="tool-title">Fear Checker</h2>
+          <p class="tool-desc">Специализированная программа для выявления следов инжектов, читов и скрытого софта.</p>
+          <ul class="features-list">
+            <li>Сканирование памяти и кэша BAM/DAM</li>
+            <li>Обнаружение модификаций и скриптов</li>
+            <li>Быстрый аудит системы во время SS-проверки</li>
+            <li>Проверка USB-истории и удаленных файлов</li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <!-- Переход на сайт fearcs2.ru -->
+          <a href="https://fearcs2.ru" target="_blank" class="btn">Скачать с сайта fearcs2.ru</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Сборка инструментов для проверки системы</p>
+  </footer>
+
+</body>
+</html>
